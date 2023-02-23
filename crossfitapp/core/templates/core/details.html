@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Crossfit PRs App {% endblock title %}
+
+
+{% block content %}
+
+<h1>Editing Exercise</h1>
+<div>
+    <h1>{{ item.name }}</h1>
+    <h1>{{ item.personal_record }}</h1>
+    <h1>{{ item.pr_date }}</h1>
+    <h1>{{ item.observation }}</h1>
+</div>
+
+{% endblock  %}
