@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from .models import Item
+
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -37,3 +39,28 @@ class SignupForm(UserCreationForm):
     'placeholder': 'Repeat password',
     'class': 'w-full py-4 px-4 rounded-xl'
     }))
+
+INPUT_CLASSES = 'w-full py-4 px-6 rounded-xl border'
+
+class NewItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = {'name', 'observation', 'personal_record', 'pr_date'}
+        
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'observation': forms.Textarea(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'personal_record': forms.NumberInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'pr_date': forms.DateInput(format=('%Y-%m-%d'), attrs={
+                'class': INPUT_CLASSES,
+                'type': 'date'
+            }),
+        }
+        
+    field_order  = ['name', 'personal_record', 'pr_date', 'observation']

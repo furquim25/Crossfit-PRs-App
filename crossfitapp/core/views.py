@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 from core.models import Item
 
-from .forms import SignupForm
+from .forms import SignupForm, NewItemForm
 
 # Create your views here.
+@login_required
 def index(request):
      items = Item.objects.all()
      return render(request, 'core/index.html', {
@@ -38,3 +40,20 @@ def logout_view(request):
      logout(request)
      print("LOGOUT")
      return redirect('/login/')
+
+@login_required
+def new(request):
+     if request.method == 'POST':
+          form = NewItemForm(request.POST)
+          if form.is_valid():
+               item = form.save(commit=False)
+               item.created_by = request.user
+               item.save()
+               
+               return redirect('/')
+     else:
+          form = NewItemForm()
+     return render(request, 'core/form.html',{
+          'form': form,
+          'title': 'New Personal Record'
+     })

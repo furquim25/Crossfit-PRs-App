@@ -30,6 +30,14 @@
 <div class="flex items-center justify-center">
     <a href="{% url 'core:signup' %}">Or <strong>SIGN UP</strong></a>
 </div>
+<br>
+{% if form.errors or form.non_field_errors %}
+<div class="mb-3 p-6 bg-red-100 rounded-xl">
+    {% for field in form %}
+        {{ field.errors }}
+    {% endfor %}
 
-
+    {{form.non_field_errors}}
+</div>
+{% endif %}
 {% endblock content %}
