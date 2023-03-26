@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from core.models import Item
 
-from .forms import SignupForm, NewItemForm
+from .forms import SignupForm, NewItemForm, EditItemForm
 
 # Create your views here.
 @login_required
@@ -57,3 +57,29 @@ def new(request):
           'form': form,
           'title': 'New Personal Record'
      })
+     
+@login_required
+def edit(request, pk):
+     item = get_object_or_404(Item, pk=pk, created_by=request.user)
+     
+     if request.method == 'POST':
+          form = EditItemForm(request.POST, instance=item)
+          if form.is_valid():
+               form.save()
+               
+               return redirect('/')
+     else:
+          form = EditItemForm(instance=item)
+     return render(request, 'core/form.html',{
+          'form': form,
+          'title': 'Edit Personal Record',
+          
+     })
+     
+@login_required
+def delete(request, pk):
+     item = get_object_or_404(Item,pk=pk,created_by=request.user)
+     item.delete()
+     
+     return redirect('core:index')
+     

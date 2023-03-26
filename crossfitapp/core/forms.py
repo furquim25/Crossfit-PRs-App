@@ -64,3 +64,26 @@ class NewItemForm(forms.ModelForm):
         }
         
     field_order  = ['name', 'personal_record', 'pr_date', 'observation']
+
+class EditItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = {'name', 'observation', 'personal_record', 'pr_date'}
+        
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'observation': forms.Textarea(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'personal_record': forms.NumberInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'pr_date': forms.DateInput(format=('%Y-%m-%d'), attrs={
+                'class': INPUT_CLASSES,
+                'type': 'date'
+            }),
+        }
+        
+    field_order  = ['name', 'personal_record', 'pr_date', 'observation']
