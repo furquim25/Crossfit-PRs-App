@@ -9,9 +9,15 @@ from .forms import SignupForm, NewItemForm, EditItemForm
 # Create your views here.
 @login_required
 def index(request):
-     items = Item.objects.all()
+     query = request.GET.get('query','')
+     items = Item.objects.filter(created_by=request.user)
+     
+     if query:
+          items = items.filter(name__icontains=query)
+     
      return render(request, 'core/index.html', {
-          'items': items
+          'items': items,
+          'query': query
      })
  
 def info(request):
