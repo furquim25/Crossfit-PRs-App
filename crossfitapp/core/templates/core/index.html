@@ -4,7 +4,7 @@
 
 
 {% block content %}
-    <h2 class="mb-12 text-2xl text-center"> Search </h2>
+    <h2 class="mb-12 text-2xl text-center"> Welcome, {{ request.user.first_name }}! </h2>
     <form method="get" action="{% url 'core:index' %}">
         <div class="flex items-center">
             <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Search a Personal Record">
