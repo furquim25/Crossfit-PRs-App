@@ -18,7 +18,12 @@ class LoginForm(AuthenticationForm):
 class SignupForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name' ,'password1', 'password2')
+        
+    first_name = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Your first name',
+        'class': 'w-full py-4 px-4 rounded-xl'
+    }))
         
     username = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Your username',
