@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>{% block title %}{% endblock title %}</title>
 </head>
-<body>
-	<nav class="py-6 px-6 flex justify-center items-center border-b border-gray-200 bg-indigo-600 h-16 sticky top-0 relative">
+<body class="bg-gray-100">
+	<nav class="py-6 px-6 flex justify-center items-center border-b border-gray-200 bg-indigo-600 h-16 sticky top-0 relative z-10">
 		<a href="/" class="text-xl font-semibold text-white flex-grow text-center">Crossfit PRs App</a>
 	  
 		<a href="{% if user.is_authenticated %}{% url 'core:logout' %}{% else %}{% url 'core:login' %}{% endif %}" class="flex items-center absolute right-3">
