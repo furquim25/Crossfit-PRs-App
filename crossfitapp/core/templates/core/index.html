@@ -4,14 +4,14 @@
 
 
 {% block content %}
-    <h2 class="mb-12 text-2xl text-center"> Welcome, {{ request.user.first_name }}! </h2>
+    <h2 class="mb-12 text-2xl text-center"> Welcome, {{ request.user.first_name }}! 💪 </h2>
     <form method="get" action="{% url 'core:index' %}">
         <div class="flex items-center">
             <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Search a Personal Record">
             {% if query %}
-                <a href="{% url 'core:index' %}"><button type="button" class="ml-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl"> Clear </button></a>
+                <a href="{% url 'core:index' %}"><button type="button" class="ml-2 w-[7.5rem] py-4 px-8 text-lg bg-teal-500 text-white rounded-xl"> Clear </button></a>
             {% else %}
-                <a href="{% url 'core:index' %}"><button type="submit" class="ml-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl"> Search </button></a>
+                <a href="{% url 'core:index' %}"><button type="submit" class="ml-2 w-[7.5rem] py-4 px-8 text-lg bg-teal-500 text-white rounded-xl"> Search </button></a>
             {% endif %}
         </div>
           
